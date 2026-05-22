@@ -24,14 +24,14 @@ export default async function Home({
   const params = await searchParams;
 
   const republicas = await getRepublicas({
-    estado: params.estado,
-    genero: params.genero,
-    pets: params.pets === "true",
-    garagem: params.garagem === "true",
+    estado:    params.estado,
+    genero:    params.genero,
+    pets:      params.pets      === "true",
+    garagem:   params.garagem   === "true",
     mobiliada: params.mobiliada === "true",
-    internet: params.internet === "true",
+    internet:  params.internet  === "true",
     preco_max: params.preco_max ? Number(params.preco_max) : undefined,
-    busca: params.busca,
+    busca:     params.busca,
   });
 
   const estadoLabel = params.estado ? `em ${params.estado}` : "no Brasil";
@@ -49,13 +49,14 @@ export default async function Home({
           <SidebarFiltros />
         </Suspense>
 
-        {/* Conteúdo principal */}
         <main className="flex-1 p-5">
           <p className="mb-4 text-sm text-zinc-500 dark:text-zinc-400">
             <span className="font-medium text-zinc-900 dark:text-white">
               {republicas.length}
             </span>{" "}
-            {republicas.length === 1 ? "república encontrada" : "repúblicas encontradas"}{" "}
+            {republicas.length === 1
+              ? "república encontrada"
+              : "repúblicas encontradas"}{" "}
             {estadoLabel}
           </p>
 
