@@ -159,3 +159,36 @@ export async function getRepublicaById(
 
   return normalized as unknown as RepublicaDetalhes;
 }
+
+export async function getRepublicaBySlug(
+  slug: string
+): Promise<RepublicaDetalhes | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("republicas")
+    .select(`
+      id, nome, slug, descricao, universidade,
+      endereco, genero,
+      vagas_total, vagas_disponiveis,
+      preco_mensal,
+      aceita_pets, tem_garagem, mobiliada, internet_inclusa,
+      status,
+      republica_fotos ( url, ordem, legenda ),
+      profiles!lider_id ( nome, telefone, avatar_url )
+    `)
+    .eq("slug", slug)
+    .order("ordem", { referencedTable: "republica_fotos", ascending: true })
+    .single();
+
+  if (error || !data) return null;
+
+  const normalized = {
+    ...data,
+    profiles: Array.isArray(data.profiles)
+      ? (data.profiles[0] ?? null)
+      : data.profiles,
+  };
+
+  return normalized as unknown as RepublicaDetalhes;
+}

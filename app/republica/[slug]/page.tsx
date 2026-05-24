@@ -1,12 +1,12 @@
 import { createClient } from "@/utils/supabase/server";
-import { getRepublicaById } from "@/lib/republicas";
+import { getRepublicaBySlug } from "@/lib/republicas";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import BotaoCandidatar from "@/components/republicas/BotaoCandidatar";
 
-type Params = { id: string };
+type Params = { slug: string };
 
 const generoLabel: Record<string, string> = {
   masculino: "Masculina",
@@ -19,8 +19,8 @@ export default async function PageRepublica({
 }: {
   params: Promise<Params>;
 }) {
-  const { id } = await params;
-  const republica = await getRepublicaById(id);
+  const { slug } = await params;
+  const republica = await getRepublicaBySlug(slug);
   if (!republica) notFound();
 
   // Verifica se o usuário já tem candidatura para esta república
@@ -34,7 +34,7 @@ export default async function PageRepublica({
     const { data: candidatura } = await supabase
       .from("candidaturas")
       .select("id, status")
-      .eq("republica_id", id)
+      .eq("republica_id", republica.id)
       .eq("user_id", user.id)
       .maybeSingle();
     jaCandidatou = !!candidatura;
