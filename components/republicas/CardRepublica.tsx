@@ -17,7 +17,7 @@ export default function CardRepublica({ republica }: { republica: Republica }) {
   const { cidade, estado } = republica.endereco;
 
   return (
-    <Link href={`/republica/${republica.id}`} className="group block">
+    <Link href={`/republica/${republica.slug ?? republica.id}`} className="group block">
       <div
         className="overflow-hidden rounded-xl border border-zinc-200 bg-white transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-900"
         style={{ boxShadow: "0 0 0 transparent" }}
