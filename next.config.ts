@@ -5,10 +5,9 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
-      // Adicione isso:
       {
         protocol: "https",
-        hostname: "*.supabase.co",
+        hostname: "guqpvmugibetkfqebokp.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
     ],
