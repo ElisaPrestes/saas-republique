@@ -5,13 +5,27 @@ import { useState, useCallback } from "react";
 
 const ESTADOS_DESTAQUE = ["SP", "RJ", "MG", "RS", "PR", "SC", "BA", "AM"];
 
+const TODOS_ESTADOS = [
+  "AC","AL","AP","AM","BA","CE","DF","ES","GO",
+  "MA","MT","MS","MG","PA","PB","PR","PE","PI",
+  "RJ","RN","RS","RO","RR","SC","SP","SE","TO",
+];
+
 export default function HeroBusca() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [busca, setBusca] = useState(searchParams.get("busca") || "");
+  const [expandido, setExpandido] = useState(false);
 
   const estadoAtivo = searchParams.get("estado");
+
+  // Se o estado ativo não está nos destaques, abre expandido automaticamente
+  const estadoAtivoForaDestaque =
+    estadoAtivo && !ESTADOS_DESTAQUE.includes(estadoAtivo);
+
+  const estadosVisiveis =
+    expandido || estadoAtivoForaDestaque ? TODOS_ESTADOS : ESTADOS_DESTAQUE;
 
   const setEstado = useCallback(
     (estado: string) => {
@@ -39,7 +53,10 @@ export default function HeroBusca() {
       </p>
 
       {/* Barra de busca */}
-      <form onSubmit={handleBusca} className="mx-auto mb-5 flex max-w-lg overflow-hidden rounded-lg border border-zinc-300 focus-within:border-[var(--blue)] dark:border-zinc-700">
+      <form
+        onSubmit={handleBusca}
+        className="mx-auto mb-5 flex max-w-lg overflow-hidden rounded-lg border border-zinc-300 focus-within:border-[var(--blue)] dark:border-zinc-700"
+      >
         <div className="flex items-center pl-3 text-zinc-400">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -63,7 +80,7 @@ export default function HeroBusca() {
 
       {/* Pills de estado */}
       <div className="flex flex-wrap justify-center gap-1.5">
-        {ESTADOS_DESTAQUE.map((uf) => (
+        {estadosVisiveis.map((uf) => (
           <button
             key={uf}
             onClick={() => setEstado(uf)}
@@ -71,17 +88,24 @@ export default function HeroBusca() {
             style={
               estadoAtivo === uf
                 ? { background: "var(--blue)", color: "#fff", border: "none" }
-                : {
-                    background: "white",
-                    color: "#71717a",
-                    border: "0.5px solid #d4d4d8",
-                  }
+                : { background: "white", color: "#71717a", border: "0.5px solid #d4d4d8" }
             }
           >
             {uf}
           </button>
         ))}
+
+        {/* Botão expandir/recolher */}
+        {!estadoAtivoForaDestaque && (
+          <button
+            onClick={() => setExpandido((v) => !v)}
+            className="rounded px-2.5 py-1 text-xs font-medium transition-colors"
+            style={{ background: "#f1d87b", color: "#4d4d4d", border: "0.5px solid #d4d4d8" }}
+          >
+            {expandido ? "− menos" : "+ ver todos"}
+          </button>
+        )}
       </div>
     </div>
   );
-}   
+}
