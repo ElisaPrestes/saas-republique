@@ -38,6 +38,7 @@ export default function CardRepublica({ republica }: { republica: Republica }) {
               src={capaUrl}
               alt={republica.nome}
               fill
+              sizes="(max-width: 768px) 100vw, 66vw"
               className="object-cover"
             />
           ) : (
