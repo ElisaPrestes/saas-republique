@@ -147,7 +147,7 @@ export default async function PageRepublica({
         </div>
 
         {/* Layout: conteúdo + sidebar */}
-        <div className="flex gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row">
           {/* Coluna principal */}
           <div className="min-w-0 flex-1">
             {/* Nome + badge + endereço */}
@@ -180,7 +180,7 @@ export default async function PageRepublica({
             </div>
 
             {/* Cards de stats */}
-            <div className="mb-6 grid grid-cols-4 gap-3">
+            <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
               {[
                 {
                   icon: (
@@ -282,9 +282,8 @@ export default async function PageRepublica({
           </div>
 
           {/* Sidebar sticky */}
-          <div className="w-72 shrink-0">
-            <div className="sticky top-20 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <p className="mb-1 text-xs text-zinc-400">Mensalidade</p>
+          <div className="w-full lg:w-72 lg:shrink-0">
+    <div className="sticky top-20 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"> <p className="mb-1 text-xs text-zinc-400">Mensalidade</p>
               <p className="mb-4 text-3xl font-bold text-zinc-900 dark:text-white">
                 R$ {Number(republica.preco_mensal).toLocaleString("pt-BR")}
                 <span className="ml-1 text-sm font-normal text-zinc-400">
