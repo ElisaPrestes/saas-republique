@@ -51,6 +51,7 @@ export type Republica = {
 // Shape completo usado na página de detalhes
 // Omit garante que republica_fotos seja sobrescrito com o tipo completo
 export type RepublicaDetalhes = Omit<Republica, "republica_fotos"> & {
+  lider_id: string | null;
   republica_fotos: RepublicaFoto[];
   profiles: Lider | null;
 };
@@ -168,7 +169,7 @@ export async function getRepublicaBySlug(
   const { data, error } = await supabase
     .from("republicas")
     .select(`
-      id, nome, slug, descricao, universidade,
+      id, nome, slug, lider_id, descricao, universidade,
       endereco, genero,
       vagas_total, vagas_disponiveis,
       preco_mensal,

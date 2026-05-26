@@ -602,7 +602,7 @@ export default function CadastrarRepublica() {
       {/* Header */}
       <header className="glass" style={{ padding: "20px 32px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div>
-          <p className="label" style={{ margin: 0 }}>RepúblicaFácil</p>
+          <p className="label" style={{ margin: 0 }}>Republique!</p>
           <h1 className="font-serif" style={{ margin: 0, fontSize: 20, fontWeight: 400 }}>Cadastrar República</h1>
         </div>
 

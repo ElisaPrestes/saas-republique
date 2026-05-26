@@ -19,6 +19,7 @@ export default async function PageRepublica({
 }: {
   params: Promise<Params>;
 }) {
+
   const { slug } = await params;
   const republica = await getRepublicaBySlug(slug);
   if (!republica) notFound();
@@ -45,12 +46,13 @@ export default async function PageRepublica({
   const fotos = republica.republica_fotos ?? [];
   const fotoCapaUrl = fotos[0]?.url ?? null;
   const fotosSecundarias = fotos.slice(1, 3); // máximo 2 no grid
+  const isLider = user?.id === republica.lider_id;
 
   const comodidades = [
     republica.internet_inclusa && "Wi-Fi incluso",
-    republica.mobiliada        && "Mobiliada",
-    republica.aceita_pets      && "Aceita pets",
-    republica.tem_garagem      && "Estacionamento",
+    republica.mobiliada && "Mobiliada",
+    republica.aceita_pets && "Aceita pets",
+    republica.tem_garagem && "Estacionamento",
   ].filter(Boolean) as string[];
 
   return (
@@ -85,6 +87,7 @@ export default async function PageRepublica({
                 src={fotoCapaUrl}
                 alt={republica.nome}
                 fill
+                sizes="(max-width: 768px) 100vw, 66vw"
                 className="object-cover"
               />
             ) : (
@@ -118,6 +121,7 @@ export default async function PageRepublica({
                       src={foto.url}
                       alt={foto.legenda ?? `Foto ${i + 2}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 66vw"
                       className="object-cover"
                     />
                   ) : (
@@ -291,6 +295,7 @@ export default async function PageRepublica({
               <BotaoCandidatar
                 republicaId={republica.id}
                 jaCandidatou={jaCandidatou}
+                isLider={isLider}
               />
 
               {/* Responsável */}
@@ -307,6 +312,7 @@ export default async function PageRepublica({
                           src={lider.avatar_url}
                           alt={lider.nome}
                           fill
+                          sizes="(max-width: 768px) 100vw, 66vw"
                           className="object-cover"
                         />
                       ) : (
