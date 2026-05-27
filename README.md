@@ -107,10 +107,14 @@ O projeto usa **Supabase** com PostgreSQL. O schema inclui:
 
 ---
 
-## Autora
+## Autoras
 
 Desenvolvido por
-**Bruna Elisa Prestes** ✩ estudante de Engenharia de Computação na UNISO, Sorocaba/SP.
+**Bruna Elisa Prestes**
+**Graziella Martins**
+**Amanda Beatriz**
+**Sofia Soriano**
+✩ estudantes de Engenharia de Computação na UNISO, Sorocaba/SP;
 
 ---
 
