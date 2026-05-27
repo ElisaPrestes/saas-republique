@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Republique! 🏠
 
-## Getting Started
+> Encontre repúblicas estudantis em todo o Brasil — filtre por cidade, universidade e perfil, e candidate-se em poucos cliques.
 
-First, run the development server:
+🔗 **[republique.vercel.app](https://republique.vercel.app)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Sobre o projeto
+
+O **Republique!** é uma plataforma web que conecta estudantes a repúblicas disponíveis em todo o Brasil. Com mais de 50 repúblicas cadastradas em todas as regiões do país, o estudante encontra opções filtradas por estado, cidade, universidade, gênero e características do imóvel **tudo em um só lugar**.
+
+O projeto nasceu da dificuldade real de encontrar moradia estudantil de forma centralizada e confiável, especialmente para quem está ingressando numa universidade em outra cidade.
+
+---
+
+## Funcionalidades
+
+- **Listagem de repúblicas** com informações de vagas, valor mensal, gênero e características
+- **Filtros por estado** — SP, RJ, MG, RS, PR, SC, BA, AM e mais
+- **Filtros por perfil** — gênero (masculino, feminino, misto), mobiliado, aceita pets, estacionamento, internet inclusa
+- **Cadastro de república** para proprietários e moradores anunciarem vagas
+- **Página individual** por república com detalhes completos
+- **Autenticação de usuários**
+
+---
+
+## Stack
+
+| Camada | Tecnologia |
+|---|---|
+| Frontend | Next.js (App Router) |
+| Backend / BaaS | Supabase (PostgreSQL + Auth + RLS) |
+| Deploy | Vercel |
+| Linguagem | TypeScript |
+
+---
+
+## Estrutura do projeto
+
+```
+republique/
+├── app/
+│   ├── page.tsx                  # Listagem principal
+│   ├── cadastrar-republica/      # Formulário de cadastro
+│   ├── login/                    # Autenticação
+│   └── republica/[slug]/         # Página individual
+├── components/
+├── lib/
+│   └── supabase/                 # Client, tipos e queries
+├── types/
+└── public/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Como rodar localmente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Pré-requisitos:** Node.js 18+ e uma conta no [Supabase](https://supabase.com)
 
-## Learn More
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/republique.git
+cd republique
 
-To learn more about Next.js, take a look at the following resources:
+# Instale as dependências
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Configure as variáveis de ambiente
+cp .env.example .env.local
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Preencha o `.env.local` com suas credenciais do Supabase:
 
-## Deploy on Vercel
+```env
+NEXT_PUBLIC_SUPABASE_URL=sua_url_aqui
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_aqui
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# Rode o servidor de desenvolvimento
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Acesse `http://localhost:3000`.
+
+---
+
+## Banco de dados
+
+O projeto usa **Supabase** com PostgreSQL. O schema inclui:
+
+- Row Level Security (RLS) em todas as tabelas
+- Triggers para consistência de dados
+- Índices para performance nas buscas por cidade, universidade e slug
+- Tipos TypeScript gerados a partir do schema
+
+---
+
+## Contribuindo
+
+1. Fork o repositório
+2. Crie uma branch: `git checkout -b feat/nome-da-feature`
+3. Commit seguindo Conventional Commits: `feat: adiciona filtro por preço`
+4. Abra um Pull Request
+
+---
+
+## Autora
+
+Desenvolvido por
+**Bruna Elisa Prestes** — estudante de Engenharia de Computação na UNISO, Sorocaba/SP.
+
+---
+
+## Licença
+MIT
