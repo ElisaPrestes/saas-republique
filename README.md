@@ -1,4 +1,5 @@
-# Republique! 🏠
+# Republique! 
+⌂♡
 
 > Encontre repúblicas estudantis em todo o Brasil — filtre por cidade, universidade e perfil, e candidate-se em poucos cliques.
 
@@ -109,7 +110,7 @@ O projeto usa **Supabase** com PostgreSQL. O schema inclui:
 ## Autora
 
 Desenvolvido por
-**Bruna Elisa Prestes** — estudante de Engenharia de Computação na UNISO, Sorocaba/SP.
+**Bruna Elisa Prestes** ✩ estudante de Engenharia de Computação na UNISO, Sorocaba/SP.
 
 ---
 
